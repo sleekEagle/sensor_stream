@@ -57,8 +57,8 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
     @Override
     protected void onResume() {
         super.onResume();
-        for(int i=0;i<sensorTypes.length;i++){
-            Sensor sensor = sensorManager.getDefaultSensor(sensorTypes[i]);
+        for(int sensorType : sensorTypes){
+            Sensor sensor = sensorManager.getDefaultSensor(sensorType);
             if (sensor != null){
                 // Success! this sensor is available
                 sensor_list.add(sensor);
