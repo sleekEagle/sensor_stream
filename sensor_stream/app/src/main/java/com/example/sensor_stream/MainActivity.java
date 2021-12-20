@@ -17,7 +17,7 @@ import java.util.List;
 public class MainActivity extends AppCompatActivity implements SensorEventListener {
     protected static final String TAG = "sensor_stream";
     private SensorManager sensorManager;
-    private Sensor mAcc;
+
     private static final int[] SENSOR_TYPES = {Sensor.TYPE_GYROSCOPE,Sensor.TYPE_ACCELEROMETER,Sensor.TYPE_GRAVITY};
     ArrayList<Sensor> sensor_list=new ArrayList<Sensor>();
 
