@@ -18,7 +18,7 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
     protected static final String TAG = "sensor_stream";
     private SensorManager sensorManager;
     private Sensor mAcc;
-    private int[] sensorTypes={Sensor.TYPE_GYROSCOPE,Sensor.TYPE_ACCELEROMETER,Sensor.TYPE_GRAVITY};
+    private static final int[] SENSOR_TYPES = {Sensor.TYPE_GYROSCOPE,Sensor.TYPE_ACCELEROMETER,Sensor.TYPE_GRAVITY};
     ArrayList<Sensor> sensor_list=new ArrayList<Sensor>();
 
     @Override
@@ -57,7 +57,7 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
     @Override
     protected void onResume() {
         super.onResume();
-        for(int sensorType : sensorTypes){
+        for(int sensorType : SENSOR_TYPES){
             Sensor sensor = sensorManager.getDefaultSensor(sensorType);
             if (sensor != null){
                 // Success! this sensor is available
