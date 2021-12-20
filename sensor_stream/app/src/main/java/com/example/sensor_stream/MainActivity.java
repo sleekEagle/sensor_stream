@@ -35,9 +35,9 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
         List<Sensor> deviceSensors = sensorManager.getSensorList(Sensor.TYPE_ALL);
         Log.i(TAG,"length of list = " + String.valueOf(deviceSensors.size()));
 
-        for (int i=0;i<deviceSensors.size();i++){
-            Log.i(TAG,"sensor type = " + deviceSensors.get(i).getStringType());
-            Log.i(TAG,"sensor name = " + deviceSensors.get(i).getName());
+        for (Sensor sensor : deviceSensors){
+            Log.i(TAG,"sensor type = " + sensor.getStringType());
+            Log.i(TAG,"sensor name = " + sensor.getName());
         }
     }
 
