@@ -19,7 +19,7 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
     private SensorManager sensorManager;
 
     private static final int[] SENSOR_TYPES = {Sensor.TYPE_GYROSCOPE,Sensor.TYPE_ACCELEROMETER,Sensor.TYPE_GRAVITY};
-    ArrayList<Sensor> sensor_list=new ArrayList<Sensor>();
+    ArrayList<Sensor> sensorList = new ArrayList<Sensor>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -61,7 +61,7 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
             Sensor sensor = sensorManager.getDefaultSensor(sensorType);
             if (sensor != null){
                 // Success! this sensor is available
-                sensor_list.add(sensor);
+                sensorList.add(sensor);
                 Log.i(TAG,"sensor available : " + sensor.getName());
                 sensorManager.registerListener(this, sensor, SensorManager.SENSOR_DELAY_FASTEST);
             } else {
