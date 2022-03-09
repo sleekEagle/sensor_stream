@@ -13,7 +13,7 @@ import java.nio.ByteBuffer;
 import java.util.ArrayList;
 
 public class Server {
-    protected static final String TAG = "cam_stream";
+    protected static final String TAG = "sensor_stream_server";
     public static volatile  Socket client = null;
     public static volatile  DataOutputStream out;
     public static volatile DataInputStream in;
