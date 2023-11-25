@@ -1,4 +1,4 @@
-# sensor_stream
+# snsr_strm
 This streams the Android sensor values to a computer.<br>
 The streaming happens through TCP over ADB connection. <br>
 The streaming can happen either over USB or WiFi connection. <br>
@@ -6,10 +6,10 @@ The python3 script client.py receives the sensor data stream and store it in a f
 Edit the list sensorTypes in the class MainActivity.java to change the types of 
 sensors that are streamed. 
 
-# format of the sensor data file
+# Format of the sensor data file
 sensor_type , accuracy_level , timestamp of device , values , timestamp of local mahcine <br>
 
-# Using
+# Usage
 1. Connect both the device and the computer to the same WiFi network (if using WiFi) <br>
 2. Turn on the snsr_strm app <br>
 3. Note the IP address shown in the app <br>
