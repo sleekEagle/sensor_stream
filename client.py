@@ -14,18 +14,20 @@ This is a temporary script file.
 """
 
 import socket
-import cv2
-import io
-import numpy as np
 import struct
-import time
 from datetime import datetime
 from pathlib import Path
+import argparse
+import os
 
-
-
-TCP_IP = '127.0.0.1'
+TCP_IP = '192.168.0.105'
 TCP_PORT = 9500
+
+def get_ts():
+    t=datetime.now()
+    now_str = t.strftime('%Y-%m-%d %H:%M:%S.%f')[:-3]
+    now_str=now_str.split(' ')[-1]
+    return now_str.replace(':','_') 
     
 def connect():
     read_int=-1
@@ -68,29 +70,36 @@ def read_next_data_array(s):
             return -1
     data=read_array(size)
     return sensor_type,accuracy,ts,data
-    
 
-    
-    
-s=connect() 
+if __name__ == '__main__':
+    parser = argparse.ArgumentParser(description='Azure kinect mkv recorder.')
+    parser.add_argument('--output', type=str,
+                        default='C:\\Users\\lahir\\data\\CPR_experiment\\test\\smartwatch\\', 
+                        help='output directory')
+    args = parser.parse_args()
 
-#send ready signal to the Android device
-p = struct.pack('!i', 23)
-s.send(p)
+    s=connect() 
+    #send ready signal to the Android device
+    p = struct.pack('!i', 23)
+    s.send(p)
 
-now = datetime.now()
-dt_string = now.strftime("%d-%m-%Y-%H-%M-%S")
-myfile = Path("/home/sleekeagle/vuzix/data/sensor/"+dt_string+".txt")
-myfile.touch(exist_ok=True)
+    now = datetime.now()
+    dt_string = now.strftime("%d-%m-%Y-%H-%M-%S")
+    Path(os.path.join(args.output)).mkdir(parents=True, exist_ok=True)
+    myfile = Path(args.output,dt_string+".txt")
+    myfile.touch(exist_ok=True)
 
-with open(myfile,"a") as f:
-    while(True):
-        data=read_next_data_array(s)
-        if(data==-1):
-            continue
-        data_str=','.join([str(item) for item in data])        
-        print(data_str)
-        f.write(data_str+'\n')
+    with open(myfile,"a") as f:
+        while(True):
+            data=read_next_data_array(s)
+            if(data==-1):
+                continue
+            data_str=','.join([str(item) for item in data])     
+            #calculate the ts
+            ts=get_ts()
+            data_str+=f',{ts}'
+            print(data_str)
+            f.write(data_str+'\n')
 
 
 
