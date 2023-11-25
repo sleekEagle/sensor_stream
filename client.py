@@ -20,7 +20,6 @@ from pathlib import Path
 import argparse
 import os
 
-TCP_IP = '192.168.0.105'
 TCP_PORT = 9500
 
 def get_ts():
@@ -29,7 +28,7 @@ def get_ts():
     now_str=now_str.split(' ')[-1]
     return now_str.replace(':','_') 
     
-def connect():
+def connect(TCP_IP):
     read_int=-1
     print("waiting for connection....")
     while(read_int!=100):
@@ -76,9 +75,12 @@ if __name__ == '__main__':
     parser.add_argument('--output', type=str,
                         default='C:\\Users\\lahir\\data\\CPR_experiment\\test\\smartwatch\\', 
                         help='output directory')
+    parser.add_argument('--ip', type=str,
+                    default='192.168.0.105', 
+                    help='IP address of the Android device')
     args = parser.parse_args()
 
-    s=connect() 
+    s=connect(args.ip) 
     #send ready signal to the Android device
     p = struct.pack('!i', 23)
     s.send(p)
