@@ -20,6 +20,13 @@ from pathlib import Path
 import argparse
 import os
 
+'''
+sensor types
+TYPE_ACCELEROMETER : 1
+TYPE_GYROSCOPE : 4
+TYPE_GRAVITY : 9
+'''
+
 TCP_PORT = 9500
 
 def get_ts():
@@ -76,7 +83,7 @@ if __name__ == '__main__':
                         default='C:\\Users\\lahir\\data\\CPR_experiment\\test\\smartwatch\\', 
                         help='output directory')
     parser.add_argument('--ip', type=str,
-                    default='192.168.0.105', 
+                    default='172.27.144.161', 
                     help='IP address of the Android device')
     args = parser.parse_args()
 
